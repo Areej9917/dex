@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\http\Controllers\AWBController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     Route::get('awb_entry','DashboardController@awb_entry')->name('awb.awb_entry');
+
+    Route::post('storeawb','AWBController@storeawb')->name('storeawb');
 
     Route::resource('roles','RolesController');
 

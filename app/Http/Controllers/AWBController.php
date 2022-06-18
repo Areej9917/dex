@@ -28,23 +28,26 @@ class AWBController extends Controller
 
         return view('awb_entry', compact('awb_entry'));
     }
-    public function StoreAwb(Request $request){
-        if($request->has('awb_numbers')){
+    public function storeawb(Request $request){
+        if($request->has('awb_no')){
     
-            $awbsNumbers = preg_split('/\r\n|\r|\n/', $request->awb_numbers);
-
+            $awbsNumbers = preg_split('/\r\n|\r|\n/', $request->awb_no);
+   
+         
             foreach($awbsNumbers as $awbNumber){
-                // dd('ss');
-                $awb = AWB::where('awb_no',$awbNumber)->first();
-                $awb->origin = $request->origin;
-                $awb->destination = $request->destination;
-                $awb->save();
-                }
+               
+                AWB::create([
+                        'awb_no' => $awbNumber,
+                        'origin' => $request->origin,
+                        'destination' => $request->destination,
+                               ]);
+
+                    return redirect()->route('awb.awb_entry'); 
             }
-        
-        return redirect()->route('awb_entry');
+        }   
 
     }
+
   
     /**
      * soft delete post

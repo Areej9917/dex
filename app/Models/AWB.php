@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class AWB extends Model
 {
     use HasFactory, SoftDeletes;
-
+    protected $table = "awb_numbers_list";
     protected $fillable = [
         'awb_no',
         'status',

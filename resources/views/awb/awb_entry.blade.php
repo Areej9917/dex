@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <form method="post" action="{{ route('StoreAwb') }}">
+    <form method="post" action="{{ route('storeawb') }}">
        
         @csrf
 
@@ -36,7 +36,7 @@
                   <label>Awb No:</label>
                   <span>*</span>
                   <div class="input-icons">
-                  <textarea name="awb_numbers" class="form-control" id="" cols="30" rows="10"></textarea>
+                  <textarea name="awb_no" class="form-control" id="" cols="30" rows="10"></textarea>
               
                  </div>
                </div>
