@@ -24,7 +24,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('awb_entry','DashboardController@awb_entry')->name('awb.awb_entry');
 
     Route::post('storeawb','AWBController@storeawb')->name('storeawb');
+    
+    
+    Route::resource('delivery-statuses','DeliveryStatusesController');
 
+    Route::resource('service-areas','ServiceAreasController');
+    
     Route::resource('roles','RolesController');
 
     Route::resource('users','UsersController');
@@ -32,7 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('change-password','UsersController@changePassword')->name('user.change-password');
 
     Route::post('update-password','UsersController@updatePassword')->name('user.update-password');
-
+    
+    Route::get('markStatusBulk', 'AWBController@markStatusBulk')->name('markStatusBulk');
+    Route::post('markStatusDoneBulk', 'AWBController@markStatusDoneBulk')->name('markStatusDoneBulk');
 
 
 

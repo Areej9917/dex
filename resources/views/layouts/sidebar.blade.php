@@ -51,6 +51,25 @@
                                 </i>Create AWB
                             </a>
                         </li>
+   
+                        <li>
+                            <a href="{{route('markStatusBulk')}}" data-id="awb_management" >
+                                <i class="metismenu-icon">
+                                </i>Mark Status
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('delivery-statuses.index')}}" data-id="awb_management" >
+                                <i class="metismenu-icon">
+                                </i>Delivery Statuses
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('service-areas.index')}}" data-id="awb_management" >
+                                <i class="metismenu-icon">
+                                </i>Service Areas
+                            </a>
+                        </li>
                       
                   
                         </ul>

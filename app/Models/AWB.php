@@ -17,5 +17,10 @@ class AWB extends Model
         'destination',
         
     ];
+    protected $casts = [
+        'awb_no' => 'array',
+        'origin' => 'array',
+        'destination' => 'array',
+    ];
   
 }

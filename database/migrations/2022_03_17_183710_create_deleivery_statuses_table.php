@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAwbNumbersList extends Migration
+class CreateDeleiveryStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateAwbNumbersList extends Migration
      */
     public function up()
     {
-        Schema::create('awb_numbers_list', function (Blueprint $table) {
+        Schema::create('deleivery_statuses', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('name');
             
-            $table->bigIncrements('id');
-            $table->string('awb_no');
-            $table->integer('status')->default(1);
-            $table->string('origin');
-            $table->string('destination');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateAwbNumbersList extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('awb_numbers_list');
+        Schema::dropIfExists('deleivery_statuses');
     }
 }
