@@ -218,8 +218,7 @@ class AWBController extends Controller
                         'awb_id' => $awb->id,
                         'date' => $deliveryDate[$key],
                         'time' => $deliveryTime[$key],
-                        'signature' => $7yhuuui'
-                        'kk [$key],
+                        'signature' => $signature[$key],
                         
                     ]);
 
