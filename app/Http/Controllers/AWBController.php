@@ -179,14 +179,19 @@ class AWBController extends Controller
 
         $statuses = DeliveryStatus::select('id','name')->whereNotIn('id',[1,2])->get();
         $locations = ServiceArea::select('id','name')->get();
+        
         //$awbs = AwbDeliveryStatus::with('awb_id')->get();
          $awbs = new AwbDeliveryStatus;
          $awbs = $awbs->get();
+
+         $fwdawbs = new ForwardNo;
+         $fwdawbs = $fwdawbs->get();
 
         return view('awb.track_awb',[
              'awbs'  => $awbs,
              'statuses' => $statuses,
              'locations' => $locations,
+             'fwdawbs' => $fwdawbs,
          
         ]);
     }

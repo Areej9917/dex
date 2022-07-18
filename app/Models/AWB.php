@@ -39,7 +39,9 @@ class Awb extends Model
     }
     
     public function forward() {
-        return $this->belongsTo(forward_no::class);
+        return $this->belongsTo(ForwardNo::class);
     }
-  
+    public function forwarder() {
+        return $this->belongsTo(Forwarder::class);
+    }
 }
