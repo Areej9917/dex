@@ -10,7 +10,7 @@
                 </i>
             </div>
             <div>
-               Create Awbs 
+                Proof of Delivery 
             </div>
         </div>
         <div class="page-title-actions">
@@ -21,14 +21,7 @@
 @section('main-content')
 <!-- Modal -->
 
-<div class="back-img"><img class="airway-img" src="{{URL::asset('assets/images/awb.jpg')}}"><div class="text-centered">AIRWAY BILL GENERATION</div></div>
 <div class="container-fluid bg-white p-3">
-@if(Session::has('success'))
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Success!</strong> {{ Session::get('success', '') }}
-        </div>
-    @endif
     @if(Session::has('error'))
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -36,7 +29,7 @@
         </div>
     @endif
 
-    <form method="post" action="{{ route('storeawb') }}">
+    <form method="post" action="{{ route('proofofdelivery') }}">
        
         @csrf
 
@@ -51,7 +44,6 @@
             </ul>
         </div>
     @endif
-    
         <div class="info">
 
             <div class="row">
@@ -61,26 +53,35 @@
                   <label>Awb No:</label>
                   <span>*</span>
                   <div class="input-icons">
-                  <textarea name="awb_no" class="form-control" id="" cols="30" rows="10"></textarea>
+                  <textarea name="awb_numbers" class="form-control" id="" cols="30" rows="10"></textarea>
               
                  </div>
                </div>
               </div>
               <div class="col-3">
               <div class="form-group">
-                  <label>Origin:</label>
+                  <label>Date:</label>
                   <span>*</span>
                   <div class="input-icons">
-                  <textarea name="origin" class="form-control" id="" cols="30" rows="10"></textarea>
+                  <textarea name="date" class="form-control" id="" cols="30" rows="10"></textarea>
                  </div>
                </div>
               </div>
               <div class="col-3">
                   <div class="form-group">
-                  <label>Destination:</label>
+                  <label>Time:</label>
                   <span>*</span>
                   <div class="input-icons">
-                  <textarea name="destination" class="form-control" id="" cols="30" rows="10"></textarea>
+                  <textarea name="time" class="form-control" id="" cols="30" rows="10"></textarea>
+                 </div>
+                 </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                  <label>Signature:</label>
+                  <span>*</span>
+                  <div class="input-icons">
+                  <textarea name="signature" class="form-control" id="" cols="30" rows="10"></textarea>
                  </div>
                  </div>
                 </div>

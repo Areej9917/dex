@@ -48,7 +48,7 @@
                         <li>
                             <a href="{{route('awb.awb_entry')}}" data-id="awb_management" >
                                 <i class="metismenu-icon">
-                                </i>Create AWB
+                                </i>First Entry
                             </a>
                         </li>
    
@@ -62,6 +62,30 @@
                             <a href="{{route('delivery-statuses.index')}}" data-id="awb_management" >
                                 <i class="metismenu-icon">
                                 </i>Delivery Statuses
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('awb.track_awb')}}" data-id="awb_management" >
+                                <i class="metismenu-icon">
+                                </i>View Status
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('awb.pod')}}" data-id="awb_management" >
+                                <i class="metismenu-icon">
+                                </i>Proof Of Delivery
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('awb.forward_no')}}" data-id="awb_management" >
+                                <i class="metismenu-icon">
+                                </i>Forward Awb
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('track')}}" data-id="awb_management" >
+                                <i class="metismenu-icon">
+                                </i>Track Status
                             </a>
                         </li>
                         <li>

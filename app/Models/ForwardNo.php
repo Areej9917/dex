@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AwbDeliveryStatus extends Model
+class ForwardNo extends Model
 {
     use HasFactory;
 
-
-    protected $table = 'awb_delivery_statuses';
+    protected $table = 'forward_no';
 
     protected $fillable = [
-        'awb_id',
-        'delivery_status_id',
+        'awb_no',
+        'fwd_no',
         'service_area_id',
+        'forwarder',
+        'delivery_status_id',
         'date_time'
         
     ];

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAwbNumbersList extends Migration
+class CreateForwardNo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateAwbNumbersList extends Migration
      */
     public function up()
     {
-        Schema::create('awb_numbers_list', function (Blueprint $table) {
-            
-            $table->bigIncrements('id');
+        Schema::create('forward_no', function (Blueprint $table) {
+            $table->id();
             $table->integer('awb_no');
-            $table->integer('status')->default(1);
-            $table->string('origin');
-            $table->string('destination');
-            $table->softDeletes();
+            $table->string('fwd_no');
+            $table->integer('service_area_id');
+            $table->string('forwarder');
+            $table->integer('delivery_status_id');
+            $table->string('date_time');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateAwbNumbersList extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('awb_numbers_list');
+        Schema::dropIfExists('forward_no');
     }
 }

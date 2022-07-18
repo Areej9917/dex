@@ -20,7 +20,7 @@
                 </i>
             </div>
             <div>
-                Awbs
+               Mark Awbs Status
             </div>
         </div>
         <div class="page-title-actions">
@@ -64,7 +64,7 @@
     </div>
     <form method="POST" action="{{route('markStatusDoneBulk')}}">
         @csrf
-        <input type="text" name="awb_numbers" value="{{request()->awb_numbers}}">
+        <input type="hidden" name="awb_numbers" value="{{request()->awb_numbers}}">
 
         <div class="main-card mb-3 card">
             <div class="card-body">
@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <label>Status:</label>
                             <span>*</span>
-                            <select class="form-control" name="deleivery_status_id" required>
+                            <select class="form-control" name="delivery_status_id" required>
                                 <option value="">Select Status</option>
                                 @foreach ($statuses as $status)
                                 <option value="{{$status->id}}">{{$status->name}}</option>
@@ -130,13 +130,13 @@
                     <table class="table table-hover table-striped table-bordered">
                         <thead>
                             <th>AWB Found</th>
-                            <th>Status</th>
+                            
                         </thead>
                         <tbody>
                             @foreach ($awbsFound as $awbFound)
                             <tr style="text-align: center">
                                 <td>{{$awbFound->awb_no}}</td>
-                                <td>{{$awbFound->currentDeliveryStatus->name}}</td>
+              
                             </tr>
                             @endforeach
                         </tbody>
@@ -164,6 +164,9 @@
         </div>
     </div>
 </div>
+
+
+
 @endsection
 
 @section('js')

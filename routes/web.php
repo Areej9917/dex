@@ -19,12 +19,9 @@ Route::get('/', function()
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', 'DashboardController@index')->name('dashboard');
 
-    Route::get('awb_entry','DashboardController@awb_entry')->name('awb.awb_entry');
-
-    Route::post('storeawb','AWBController@storeawb')->name('storeawb');
-    
+    Route::get('/','DashboardController@awb_entry')->name('awb.awb_entry');
+    Route::post('storeawb','AwbController@storeawb')->name('storeawb');
     
     Route::resource('delivery-statuses','DeliveryStatusesController');
 
@@ -35,13 +32,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users','UsersController');
 
     Route::get('change-password','UsersController@changePassword')->name('user.change-password');
-
     Route::post('update-password','UsersController@updatePassword')->name('user.update-password');
     
-    Route::get('markStatusBulk', 'AWBController@markStatusBulk')->name('markStatusBulk');
-    Route::post('markStatusDoneBulk', 'AWBController@markStatusDoneBulk')->name('markStatusDoneBulk');
-
-
+    Route::get('markStatusBulk', 'AwbController@markStatusBulk')->name('markStatusBulk');
+    Route::post('markStatusDoneBulk', 'AwbController@markStatusDoneBulk')->name('markStatusDoneBulk');
+   
+    Route::get('track/{id?}', 'AwbController@trackAwbs')->name('track');
+    
+    Route::get('track_awb', 'AwbController@checkStatus')->name('awb.track_awb');
+    
+    
+    Route::get('proofofdelivery', 'AwbController@proofofdelivery')->name('awb.pod');
+    Route::post('proofofdelivery', 'AwbController@proofofdelivery')->name('proofofdelivery');
+    
+    Route::get('forward_no', 'AwbController@forwarder')->name('awb.forward_no');
+    Route::post('markforwarder', 'AwbController@markforwarder')->name('markforwarder');
 
 });
 

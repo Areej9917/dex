@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class AWB extends Model
+class Awb extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = "awb_numbers_list";
@@ -17,10 +17,29 @@ class AWB extends Model
         'destination',
         
     ];
+ 
     protected $casts = [
-        'awb_no' => 'array',
-        'origin' => 'array',
-        'destination' => 'array',
+ 
+        'created_at' => 'datetime',
+        'date_time' => 'datetime'
     ];
+
+    public function deliveryStatuses(){
+        return $this->hasMany(AwbDeliveryStatus::class)->orderBy('id','desc');
+    }
+
+
+    public function currentDeliveryStatus()
+    {
+        return $this->belongsTo(DeliveryStatus::class,'delivery_status_id');
+    }
+
+    public function currrentServiceArea() {
+        return $this->belongsTo(ServiceArea::class);
+    }
+    
+    public function forward() {
+        return $this->belongsTo(forward_no::class);
+    }
   
 }
