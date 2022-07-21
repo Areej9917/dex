@@ -8,6 +8,7 @@ use App\Models\AwbDeliveryStatus;
 use App\Models\ServiceArea;
 use App\Models\DeliveryStatus;
 use App\Models\ForwardNo;
+use App\Models\Forwarder;
 use App\Models\ProofOfDelivery;
 use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
@@ -36,6 +37,7 @@ class AWBController extends Controller
 
         return view('awb_entry', compact('awb_entry'));
     }
+    
     public function storeawb(Request $request){
 
      
@@ -179,24 +181,19 @@ class AWBController extends Controller
 
         $statuses = DeliveryStatus::select('id','name')->whereNotIn('id',[1,2])->get();
         $locations = ServiceArea::select('id','name')->get();
-        
         //$awbs = AwbDeliveryStatus::with('awb_id')->get();
          $awbs = new AwbDeliveryStatus;
          $awbs = $awbs->get();
-
-         $fwdawbs = new ForwardNo;
-         $fwdawbs = $fwdawbs->get();
 
         return view('awb.track_awb',[
              'awbs'  => $awbs,
              'statuses' => $statuses,
              'locations' => $locations,
-             'fwdawbs' => $fwdawbs,
          
         ]);
     }
      public function proofofdelivery(Request $request){
-        
+        //return 'hit';
         if($request->has('awb_numbers')){
            
             $deliveryDate = preg_split('/\r\n|\r|\n/', $request->date);;
@@ -230,11 +227,12 @@ class AWBController extends Controller
                 }
                 
             }
-            Session::flash('success','Statuses Added Successfully!');
-            // $request->merge(['awb_numbers','']);
           
-        return view('awb.pod');
      }
+     Session::flash('success','Statuses Added Successfully!');
+     // $request->merge(['awb_numbers','']);
+   
+        return view('awb.pod');
     }
       
     /**
@@ -262,43 +260,52 @@ class AWBController extends Controller
     }
     public function forwarder(){
         $locations = ServiceArea::select('id','name')->get();
+        $forwarders = Forwarder::select('id','name')->get();
         return view('awb.forward_no',[
-           
+            'forwarders' => $forwarders,
             'locations' => $locations,
         
        ]);
     }
     public function markforwarder(Request $request){
-
         if($request->has('awb_numbers')){
             $ForwardDatetime = $request->forward_date . ' ' . $request->forward_time;
             $awbsNumbers = preg_split('/\r\n|\r|\n/', $request->awb_numbers);
             $forward_no = preg_split('/\r\n|\r|\n/', $request->fwd_no);
+            
             foreach($awbsNumbers as $key => $awbNumber){
-                // dd('ss');
+                $awb = Awb::where('awb_no',$awbNumber)->first();
+                if(!$awb){
+                    continue;
+                }
+                $fwd = Forwarder::find($request->forwarder);
+                
+                $url = str_replace('awb_fwd_id',$forward_no[$key],$fwd->url);
+                $status = new AwbDeliveryStatus;
+                $status->awb_id = $awb->id;
+                
+                if($request->forwarder==1){
+                    $status->delivery_status_id = 9;
+                }
+                elseif($request->forwarder==2) {
+                    $status->delivery_status_id = 8;
+                }elseif($request->forwarder==3) {
+                    $status->delivery_status_id = 10;
+                }
                 
                 
-                    ForwardNo::create([
-                        'awb_no' => $awbNumber,
-                        'fwd_no' => $forward_no[$key],
-                        'service_area_id' => $request->service_area,
-                        'forwarder' => $request->forwarder,
-                        'delivery_status_id' => 9,
-                        'date_time' => $ForwardDatetime,
-                        
-                    ]);
-                    
-
-                
-                
-              
-                
+                $status->service_area_id = $request->service_area;
+                $status->date_time = $ForwardDatetime;
+                $status->fwd_id = $fwd->id;
+                $status->fwd_no = $forward_no[$key];
+                $status->fwd_url = $url;
+                $status->save();
             }
         
             
             Session::flash('success','Statuses Added Successfully!');
             // $request->merge(['awb_numbers','']);
-            return redirect()->route('awb.forward_no');
+            // return redirect()->route('awb.forward_no');
         }
     
     }

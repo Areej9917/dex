@@ -67,10 +67,7 @@
 
                 </tr>
                 @endforeach
-
-
-
-        </table>
+</table>
 
 
 
@@ -78,43 +75,6 @@
 
         
        
-    </div>
-</div>
-<div class="main-card mb-3 card">
-    <div class="card-body" style="overflow:auto;">
-
-    <table style="width: 100%;" id="dataTable" class="table table-hover table-striped table-bordered">
-            <thead>
-
-            <tr>
-                
-                <th>S.No</th>
-                <th>Awb No</th>
-                <th>Service Area</th>
-                <th>Deleivery Status</th>
-                <th>Date Time</th>
-              
-            </tr>
-
-            </thead>
-            <tbody>
-                @foreach ($fwdawbs as $index => $fwdawb)
-                <tr>
-                 
-                    <td>{{$index+1}}</td>
-            
-                    <td>{{$fwdawb->awb_no}}</td>
-                    <td>{{($fwdawb->serviceArea ? $fwdawb->serviceArea->name : "")}}</td>
-                    <td><a href="http://www.dhl.com/content/g0/en/express/tracking.shtml?brand=DHL&AWB={{$fwdawb->awb_no}}">{{($fwdawb->deliveryStatus ? $fwdawb->deliveryStatus->name : "")}}</a></td>
-                    <td>{{$fwdawb->date_time}}</td>
-                
-
-                </tr>
-                @endforeach
-
-
-
-        </table>
     </div>
 </div>
      

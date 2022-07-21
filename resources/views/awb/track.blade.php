@@ -24,36 +24,7 @@ span{
            
    <div class="details">
 
-      <div class="info" style="position:relative;">
-         <h4 class="heading1" style="font-size:25px;">AWB No: {{$awb->awb_no}}</h4>
-         <div class="container-fluid" id="div1" >
-            <h4 class="heading1" style="font-size: 30px;float: left;font-weight: 800;margin: 20px;">
-               {{$awb->name}}</h4>
-            <img src="{{asset('assets/images/delivery.jpg')}}" style="width:420px;">
-            <hr style="height:2px;border-width:0;color:gray;background-color:red">
-            <h4 class="heading1"  style="float:left;margin-left:50px;">Delivery On
-               </br>{{ $awb->receiver_date_time ? date('d-m-Y',strtotime($awb->receiver_date_time)) : ''}}
-            </h4>
-            <h4 class="heading1">Delivery Time At</br>
-               {{ $awb->receiver_date_time ? date('h:i A',strtotime($awb->receiver_date_time)) : ''}}
-            </h4>
-         </div>
-         <div class="container-fluid" id="div2" >
-            <h4 class="heading1" style="margin-right: 290px;margin-top: 20px;">Delivered To :</h4>
-            <h4 class="head">
-            
-                   {{$awb->name}}
-         
-            </h4>
-            <hr style="height:2px;border-width:0;color:gray;background-color:red">
-            <h4 style="float: left;margin-right: 10px;font-size:17px;font-weight: 700;color: black;">Delivery Time:</h4><span style="color: black;"></span>
-            <h4 style="font-size: 17px;font-weight: 700;float:right;margin-right:70px;color: black;">Received By:</h4><span style="float: right;margin-right: -135px;color: black;"></span>
-            {{-- Proof Of Delivery --}}
-         </div>
-         <div class="container-fluid bg-white" id="div3">
-         </div>
-      </div>
-      {{-- @endif --}}
+      
    <div class="col-12 bg-secondary text-center mt-3 p-1 text-white">
       <h4 class="heading2">Shipment Progress<i class="fa-solid fa-angle-down"></i></h4>
    </div>
@@ -72,7 +43,15 @@ span{
             @foreach ($awb->deliveryStatuses as $awbDeliveryStatus)
                 
             <tr role="row">
-               <td><input type="checkbox" class="option-input radio"><span class="label-text">{{$awbDeliveryStatus->deliveryStatus->name ?? ''}}</span></td>
+               <td>
+                  <input type="checkbox" class="option-input radio"><span class="label-text">
+                    {{-- @if ($awbDeliveryStatus->deliveryStatus->id == 8) --}}
+                        <a href="{{$awbDeliveryStatus->fwd_url}}" target="_blank">{{$awbDeliveryStatus->deliveryStatus->name ?? ''}}</a> 
+                  {{-- @else
+                        {{$awbDeliveryStatus->deliveryStatus->name ?? ''}}
+                     @endif --}}
+                  </span>
+               </td>
                <td>{{date('d-m-Y',strtotime($awbDeliveryStatus->date_time))}}</br>{{date('H-i-s',strtotime($awbDeliveryStatus->date_time))}}</td>
                <td>
                   @if($awbDeliveryStatus->delivery_status_id == 1)
@@ -93,6 +72,137 @@ span{
          
          </tbody>
       </table>
+
+      <table width="98%" border="0" align="center" cellpadding="1" cellspacing="2" bordercolor="red">
+ 
+ <tbody><tr> 
+   <td colspan="5">
+     
+       </td>
+  </tr>
+  
+<tr> 
+
+ 
+<td align="right" colspan="3">&nbsp;</td>
+</tr>
+
+<tr> 
+   <td colspan="2" align="center" width="26%" height="23" class="headerback2"> 
+   AWB</td>
+   <td width="8%" align="center" class="headerback2"> 
+    Origin</td>
+   <td align="center" class="headerback2"> 
+     Destination</td>
+   <td align="center" class="headerback2" width="48%"> 
+     Last Status</td>
+ </tr>
+ @foreach ($awb->deliveryStatuses as $awbDeliveryStatus)
+<tr> 
+
+ <td colspan="2" align="left" style="vertical-align:bottom;text-align: center;" class="itemback3">{{date('d-m-Y',strtotime($awbDeliveryStatus->date_time))}}</td>
+
+ 
+ <td class="itemback3" align="center" style="vertical-align:bottom;text-align: center;">{{date('H-i-s',strtotime($awbDeliveryStatus->date_time))}}</td>
+ <td class="itemback3" align="center" style="vertical-align:bottomtext-align: center;">  
+                  @if($awbDeliveryStatus->delivery_status_id == 1)
+
+                  @elseif($awbDeliveryStatus->delivery_status_id == 2)
+                  
+                  @else
+                     {{$awbDeliveryStatus->serviceArea->name ?? ''}}
+                  @endif
+         
+ </td>
+ 
+ <td class="itemback3" style="vertical-align:bottom;text-align: center;" align="left">
+
+ <a href="{{$awbDeliveryStatus->fwd_url}}" target="_blank">{{$awbDeliveryStatus->deliveryStatus->name ?? ''}}{{$awbDeliveryStatus->fwd_no}}</a> 
+ 
+ 
+ 
+ </td>  
+
+
+
+@endforeach
+<tr>
+ <td colspan="5"></td>
+</tr>
+
+</tbody></table>
+
+
+      <table width="98%" border="0" align="center" cellpadding="1" cellspacing="2" bordercolor="red">
+ 
+ <tbody><tr> 
+   <td colspan="5">
+     
+       </td>
+  </tr>
+  
+<tr> 
+
+<td align="left" colspan="3"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
+<b>COMPLETE STATUS</b></font><br>
+<font size="2" face="Arial, Helvetica, sans-serif"><strong> 
+     Airway Bill #</strong> 
+    
+   <strong><a>{{$awb->awb_no}}</a></strong>
+    
+
+    
+    </font> 
+</td>  
+<td align="right" colspan="3">&nbsp;</td>
+</tr>
+
+<tr> 
+   <td colspan="2" align="center" width="26%" height="23" class="headerback2"> 
+Date</td>
+   <td width="8%" align="center" class="headerback2"> 
+    Time</td>
+   <td align="center" class="headerback2"> 
+     Service Area</td>
+   <td align="center" class="headerback2" width="48%"> 
+     Check 
+       Point Detail</td>
+ </tr>
+ @foreach ($awb->deliveryStatuses as $awbDeliveryStatus)
+<tr> 
+
+ <td colspan="2" align="left" style="vertical-align:bottom;text-align: center;" class="itemback3">{{date('d-m-Y',strtotime($awbDeliveryStatus->date_time))}}</td>
+
+ 
+ <td class="itemback3" align="center" style="vertical-align:bottom;text-align: center;">{{date('H-i-s',strtotime($awbDeliveryStatus->date_time))}}</td>
+ <td class="itemback3" align="center" style="vertical-align:bottomtext-align: center;">  
+                  @if($awbDeliveryStatus->delivery_status_id == 1)
+
+                  @elseif($awbDeliveryStatus->delivery_status_id == 2)
+                  
+                  @else
+                     {{$awbDeliveryStatus->serviceArea->name ?? ''}}
+                  @endif
+         
+ </td>
+ 
+ <td class="itemback3" style="vertical-align:bottom;text-align: center;" align="left">
+
+ <a href="{{$awbDeliveryStatus->fwd_url}}" target="_blank">{{$awbDeliveryStatus->deliveryStatus->name ?? ''}}{{$awbDeliveryStatus->fwd_no}}</a> 
+ 
+ 
+ 
+ </td>  
+
+
+
+@endforeach
+<tr>
+ <td colspan="5"></td>
+</tr>
+
+</tbody></table>
+      
    </div>
 </div>
 

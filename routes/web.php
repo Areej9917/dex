@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/','DashboardController@awb_entry')->name('awb.awb_entry');
     Route::post('storeawb','AwbController@storeawb')->name('storeawb');
+   // Route::get('awb_entry','AwbController@countvalidation')->name('awb.awb_entry');
     
     Route::resource('delivery-statuses','DeliveryStatusesController');
 

@@ -98,10 +98,9 @@
                             <div class="input-icons">
                             <select name="forwarder" class="form-control">
                              <option value="">Select Forwarder</option>
-                                <option value="DHL">DHL</option>
-                                <option value="FEDEX">FEDEX</option>
-                                <option value="UPS">UPS</option>
-                        
+                             @foreach ($forwarders as $forwaarder)
+                                <option value="{{$forwaarder->id}}">{{$forwaarder->name}}</option>
+                             @endforeach
                             </select>
                             </div>
                         </div>
@@ -144,22 +143,16 @@
 <script src="{{ asset('js/picker.js') }}"></script>
 
 <script>
-
    
-
     $('.datepicker').datetimepicker({
         format : "YYYY-MM-DD"
     });
-
     $('.datepicker2').datetimepicker({
         format : "YYYY-MM-DD"
     });
-
     $('.timepicker2').datetimepicker({
         format: 'HH:mm'
     });
-
  
 </script>
 @endsection
-

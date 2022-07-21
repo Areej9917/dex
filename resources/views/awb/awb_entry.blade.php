@@ -21,7 +21,7 @@
 @section('main-content')
 <!-- Modal -->
 
-<div class="back-img"><img class="airway-img" src="{{URL::asset('assets/images/awb.jpg')}}"><div class="text-centered">AIRWAY BILL GENERATION</div></div>
+<div class="back-img"><img class="airway-img" src="{{URL::asset('assets/images/awb.jpg')}}"><div class="text-centered">FIRST ENTRY</div></div>
 <div class="container-fluid bg-white p-3">
 @if(Session::has('success'))
         <div class="alert alert-success">
@@ -56,7 +56,7 @@
 
             <div class="row">
         
-              <div class="col-3">
+              <div class="col-4">
               <div class="form-group">
                   <label>Awb No:</label>
                   <span>*</span>
@@ -66,7 +66,7 @@
                  </div>
                </div>
               </div>
-              <div class="col-3">
+              <div class="col-4">
               <div class="form-group">
                   <label>Origin:</label>
                   <span>*</span>
@@ -75,7 +75,7 @@
                  </div>
                </div>
               </div>
-              <div class="col-3">
+              <div class="col-4">
                   <div class="form-group">
                   <label>Destination:</label>
                   <span>*</span>

@@ -29,4 +29,7 @@ class AwbDeliveryStatus extends Model
     public function awb(){
         return $this->belongsTo('App\Models\Awb','awb_id');
     }
+    public function forwarder(){
+        return $this->belongsTo('App\Models\Forwarder','fwd_id');
+    }
 }
